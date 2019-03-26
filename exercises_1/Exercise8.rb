@@ -30,7 +30,7 @@ def input_students
     name = gets.chomp
     cohort = gets.chomp
   end
-    students 
+    students
 end
 def print_header
   puts "The students of Villains Academy"
@@ -45,7 +45,23 @@ def print_footer(students)
   puts "Overall, we have #{students.count} great students"
 end
 
-students = input_students.sort_by(&:cohort)
+def print_by_cohort(students)
+  if students.empty?
+    puts "No students available"
+  else
+    cohorts = students.map do |student|
+      student[:cohort]
+    end
+    cohorts.uniq.each do |cohort|
+      puts "#{cohort} cohort".upcase
+        students.each do |student|
+          puts student[:name] if student[:cohort] == cohort
+        end
+    end
+  end
+end
+
+students = input_students
 print_header
-print(students)
+print_by_cohort(students)
 print_footer(students)
